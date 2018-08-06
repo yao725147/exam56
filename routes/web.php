@@ -12,9 +12,13 @@
  */
 
 Route::get('/', function () {
-    return view('welcome')
-        ->with('name', 'stu1')
-        ->with('say', '嗨！');
+
+    $data = ['name' => 'tad', 'say' => '嗨！'];
+    return view('welcome', $data);
+
+    // return view('welcome')
+    //     ->with('name', 'stu1')
+    //     ->with('say', '嗨！');
 });
 
 Auth::routes();
