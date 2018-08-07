@@ -27,6 +27,7 @@
 
         <main class="py-4">
             <div class="container"> 
+                {{-- yield是定義一個區塊,讓人放內容進來 --}}
                 @yield('content')
             </div>
         </main>
