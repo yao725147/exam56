@@ -29,6 +29,11 @@
             <div class="container"> 
                 {{-- yield是定義一個區塊,讓人放內容進來 --}}
                 @yield('content')
+                @if(session('status'))
+                    @component('bs::alert', ['type' => 'info'])
+                        {{ session('status') }}
+                    @endcomponent
+            @endif
             </div>
         </main>
     </div>

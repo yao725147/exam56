@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\Http\Requests\ExamRequest; //使用我們自製的 ExamRequest
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -15,7 +16,8 @@ class ExamController extends Controller
     public function index()
     {
         //回傳welcome.blad.php view
-        return view('welcome');
+        // return view('welcome');
+        return view('exam.index');
     }
 
     /**
@@ -35,12 +37,21 @@ class ExamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ExamRequest $request)
     {
         //-----------
         //接收建立測驗
         //-----------
         //dd($request); //把送過來的表單列出來
+
+        //表單驗證
+        // $this->validate($request, [
+        //     'title' => 'required|min:2|max:191',
+        // ], [
+        //     'required' => '「:attribute」為必填欄位',
+        //     'min'      => '「:attribute」至少要 :min 個字',
+        //     'max'      => '「:attribute」最多只能 :max 個字',
+        // ]);
 
         //批量賦值 第一種做法
         // $exam          = new Exam;

@@ -29,7 +29,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home'); //有控制器的寫法
+//Route::get('/home', 'HomeController@index')->name('home'); //有控制器的寫法
+
+Route::get('/', 'ExamController@index')->name('exam.index');
+Route::get('/home', 'ExamController@index')->name('home'); //登入完會看到的畫面
 Route::get('/exam', 'ExamController@index')->name('exam.index'); //指定打網址  localhost/exam   會導至首頁
 
 // Route::get('/exam/create', function () {

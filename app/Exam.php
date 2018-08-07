@@ -10,7 +10,7 @@ class Exam extends Model
     protected $fillable = [
         'title', 'user_id', 'enable',
     ];
-    //把enable欄位  轉換成布林值(0或1)
+    //把enable欄位  轉換成布林值(原本的資料庫資料型態是tinyint)
     protected $casts = [
         'enable' => 'boolean',
     ];
