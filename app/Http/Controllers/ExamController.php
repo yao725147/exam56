@@ -17,7 +17,10 @@ class ExamController extends Controller
     {
         //回傳welcome.blad.php view
         // return view('welcome');
-        return view('exam.index');
+
+        $exams = Exam::all(); //取得所有資料
+        //dd($exams);
+        return view('exam.index', compact('exams'));
     }
 
     /**

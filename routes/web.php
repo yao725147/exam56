@@ -23,9 +23,11 @@
 
 // });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'ExamController@index')->name('index');
 
 Auth::routes();
 
