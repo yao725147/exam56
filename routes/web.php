@@ -12,6 +12,7 @@
  */
 
 Route::get('/', function () {
+    //沒有控制器的寫法
 
     $data = ['name' => 'tad', 'say' => '嗨！'];
     return view('welcome', $data);
@@ -23,4 +24,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home'); //有控制器的寫法
+
+Route::get('/exam/create', function () {
+    //建立測驗的路由
+    return view('exam.create');
+})->name('exam.create');

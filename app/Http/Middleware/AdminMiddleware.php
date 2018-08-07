@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        dd($request);
+        // dd($request);
         if (!$request->user()->hasAnyPermission('後台管理')) {
             abort(403);
         }
