@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exam;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -36,7 +37,28 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //-----------
+        //接收建立測驗
+        //-----------
+        //dd($request); //把送過來的表單列出來
+
+        //批量賦值 第一種做法
+        // $exam          = new Exam;
+        // $exam->title   = $request->title;
+        // $exam->user_id = $request->user_id;
+        // $exam->enable  = $request->enable;
+        // $exam->save();
+
+        //批量賦值 第二種做法 ,且需要至model指定可用的欄位 (接著到 /專案/app/Exam.php 設定哪些欄位可以使用 fillable)
+        // Exam::create([
+        //     'title'   => $request->title,
+        //     'user_id' => $request->user_id,
+        //     'enable'  => $request->enable,
+        // ]);
+
+        //批量賦值 第三種做法 (最簡單)  </專案/app/Exam.php 設定哪些欄位可以使用 fillable)>
+        Exam::create($request->all());
+        return redirect()->route('exam.index');
     }
 
     /**
