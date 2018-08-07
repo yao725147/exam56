@@ -22,6 +22,9 @@
                     ->inline())
                 ->showAsRow() }}
 
+            {{-- 詳見講義3,  把使用者id抓出來,將其藏在表單中     --}}
+            {{ bs()->hidden('user_id', Auth::id()) }}                
+
             {{ bs()->formGroup()
                 ->label('', false, 'text-sm-right')
                 ->control(bs()->submit('儲存'))

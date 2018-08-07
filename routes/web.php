@@ -25,8 +25,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home'); //有控制器的寫法
+Route::get('/exam', 'ExamController@index')->name('welcome'); //指定打網址  localhost/exam   會導至首頁
 
-Route::get('/exam/create', function () {
-    //建立測驗的路由
-    return view('exam.create');
-})->name('exam.create');
+// Route::get('/exam/create', function () {
+//     //建立測驗的路由
+//     return view('exam.create');
+// })->name('exam.create');
+
+Route::get('/exam/create', 'ExamController@create')->name('exam.create');
