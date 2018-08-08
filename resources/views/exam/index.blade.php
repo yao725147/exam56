@@ -3,7 +3,7 @@
 {{-- 用來定義一個樣板變數content，及其對應值 --}}
 @section('content')
     {{-- container是bootstrap的用法,它是一個容器 --}}
-        <h1>隨機題庫系統</h1>
+        <h1>隨機題庫系統 <small>（共 {{$exams->total()}} 筆資料）</small></h1>
 
         <div class="list-group">      
 
@@ -20,7 +20,12 @@
                 </div>
             @endforelse
             
-        </div>    
+        </div>   
+        
+        {{-- 加入分頁 my-3 ~  my-5 超過6就失效--}}
+        <div class="my-3">   
+            {{ $exams->links() }}
+        </div>
 @endsection
 
 {{-- 

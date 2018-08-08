@@ -27,6 +27,9 @@
 //     return view('welcome');
 // });
 
+// Route::pattern('id', '[0-9]+');
+Route::pattern('exam', '[0-9]+');
+
 Route::get('/', 'ExamController@index')->name('index');
 
 Auth::routes();
@@ -44,3 +47,5 @@ Route::get('/exam', 'ExamController@index')->name('exam.index'); //指定打網�
 
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
+//Route::get('/exam/{id}', 'ExamController@show')->name('exam.show')->where('id', '[0-9]+'); //限定id只能是數字
+Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');

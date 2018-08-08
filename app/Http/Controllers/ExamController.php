@@ -18,7 +18,14 @@ class ExamController extends Controller
         //回傳welcome.blad.php view
         // return view('welcome');
 
-        $exams = Exam::all(); //取得所有資料
+        // $exams = Exam::all();        //Exam是eloquent model, all()是取得所有資料
+
+        // $exams = Exam::where('enable', 1)->get(); //只列出有啟用測驗的項目
+
+        $exams = Exam::where('enable', 1)
+            ->orderBy('created_at', 'desc') //按照建立測驗日期 （desc由大至小,由最近至遠)
+            ->paginate(2);
+
         //dd($exams);
         return view('exam.index', compact('exams'));
     }
@@ -81,9 +88,20 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    // public function show($id)
+    // {
+    //     //
+    //     $exam = Exam::find($id);
+    //     return view('exam.show', compact('exam'));
+    // }
+
+    //路由模型綁定 (黑魔法)
+    public function show(Exam $exam)
     {
         //
+        //$exam = Exam::find($id);
+        return view('exam.show', compact('exam'));
     }
 
     /**
