@@ -39,7 +39,8 @@ Auth::routes();
 Route::get('/', 'ExamController@index')->name('exam.index');
 Route::get('/home', 'ExamController@index')->name('home'); //登入完會看到的畫面
 Route::get('/exam', 'ExamController@index')->name('exam.index'); //指定打網址  localhost/exam   會導至首頁
-
+//Route::get('/exam/{id}', 'ExamController@show')->name('exam.show')->where('id', '[0-9]+'); //限定id只能是數字
+Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
 // Route::get('/exam/create', function () {
 //     //建立測驗的路由
 //     return view('exam.create');
@@ -47,5 +48,4 @@ Route::get('/exam', 'ExamController@index')->name('exam.index'); //指定打網�
 
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
-//Route::get('/exam/{id}', 'ExamController@show')->name('exam.show')->where('id', '[0-9]+'); //限定id只能是數字
-Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
+Route::post('/topic', 'TopicController@store')->name('exam.topic');
