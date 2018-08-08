@@ -51,7 +51,8 @@
 
         <dl>
             {{-- $key是陣列的索引值 --}}
-            @forelse ($topics as $key => $topic) 
+            {{-- @forelse ($topics as $key => $topic)  --}}
+            @forelse ($exam->topics as $key => $topic) 
             <dt class="h3">
                 
                 @can('建立測驗')
