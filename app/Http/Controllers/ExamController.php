@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
-use App\Http\Requests\ExamRequest; //使用我們自製的 ExamRequest
+use App\Http\Requests\ExamRequest;
+use App\Topic; //使用我們自製的 ExamRequest
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -101,7 +102,12 @@ class ExamController extends Controller
     {
         //
         //$exam = Exam::find($id);
-        return view('exam.show', compact('exam'));
+
+        $topics = Topic::where('exam_id', $exam->id)->get();
+        // dd($topics);
+        return view('exam.show', compact('exam', 'topics'));
+
+        // return view('exam.show', compact('exam'));
     }
 
     /**
