@@ -6,7 +6,7 @@
         <h1>
             {{$exam->title}}
             @can('建立測驗')  
-                <a href="{{ route('exam.edit',$exam->id)}}" class="btn btn-warning">編輯</a>
+                <a href="{{ route('exam.edit',$exam->id)}}" class="btn btn-warning">編輯測驗</a>
             @endcan
         </h1>
         <div class="text-center">
@@ -15,7 +15,13 @@
 
         {{-- 建立測驗題目 --}}
         @can('建立測驗')  
-            {{ bs()->openForm('post', '/topic') }}
+            @if(isset($topic))
+            {{-- //編輯測驗題目 --}}
+            {{ bs()->openForm('patch', "/topic/{$topic->id}", ['model' => $topic]) }}   
+            @else
+            {{-- //建立測驗題目 --}}
+            {{ bs()->openForm('post', '/topic') }}  
+            @endif
                 {{ bs()->formGroup()
                         ->label('題目內容', false, 'text-sm-right')  //標籤名稱
                         ->control(bs()->textarea('topic')->placeholder('請輸入題目內容'))  //輸入元件
@@ -43,7 +49,7 @@
                 {{ bs()->formGroup()
                     ->label('正確解答', false, 'text-sm-right')
                     ->control(bs()->radioGroup('ans', [1=>'1', 2=>'2',3=>'3', 4=>'4'])
-                        ->selectedOption(1)
+                        //->selectedOption(1)
                         ->inline()->addRadioClass(['my-1', 'mx-3']))  //my-1 距離上方1個單位  mx-3 距離左邊3個單位
                     ->showAsRow() }}                        
                 {{ bs()->hidden('exam_id', $exam->id) }}
@@ -54,6 +60,8 @@
             {{ bs()->closeForm() }}
         @endcan
 
+
+
         <dl>
             {{-- $key是陣列的索引值 --}}
             {{-- @forelse ($topics as $key => $topic)  --}}
@@ -61,6 +69,7 @@
             <dt class="h3">
                 
                 @can('建立測驗')
+                    <a href="{{route('topic.edit', $topic->id)}}" class="btn btn-warning">編輯題目</a>
                     （{{$topic->ans}}）
                 @endcan
                 {{-- {{ bs()->badge()->text($key+1) }} --}}

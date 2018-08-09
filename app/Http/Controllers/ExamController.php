@@ -6,6 +6,7 @@ use App\Exam;
 use App\Http\Requests\ExamRequest;
 use App\Topic; //使用我們自製的 ExamRequest
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -23,9 +24,19 @@ class ExamController extends Controller
 
         // $exams = Exam::where('enable', 1)->get(); //只列出有啟用測驗的項目
 
-        $exams = Exam::where('enable', 1)
-            ->orderBy('created_at', 'desc') //按照建立測驗日期 （desc由大至小,由最近至遠)
-            ->paginate(2);
+        //驗證是否有權限,有權限的人,秀出所有測驗
+        //Auth::check()                     檢查是否已經登入？
+        //Auth::user()->can('建立測驗')      是否有權限編修?
+        if (Auth::check() and Auth::user()->can('建立測驗')) {
+            $exams = Exam::orderBy('created_at', 'desc') //按照建立測驗日期 （desc由大至小,由最近至遠)
+                ->paginate(3);
+        } else {
+            //沒權限的人,只列出測驗有啟用的項目
+            $exams = Exam::where('enable', 1)
+                ->orderBy('created_at', 'desc') //按照建立測驗日期 （desc由大至小,由最近至遠)
+                ->paginate(3);
+
+        }
 
         //dd($exams);
         return view('exam.index', compact('exams'));

@@ -64,9 +64,13 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Topic $topic)
     {
         //
+        //編輯題目  <<注意,這裡和測驗不同>>
+
+        $exam = $topic->exam; //昨日model有設關聯,所以可以這樣用
+        return view('exam.show', compact('exam', 'topic'));
     }
 
     /**
@@ -76,9 +80,11 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Topic $topic)
     {
-        //
+        //更新題目
+        $topic->update($request->all());
+        return redirect()->route('exam.show', $topic->exam_id);
     }
 
     /**

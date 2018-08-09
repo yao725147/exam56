@@ -29,6 +29,7 @@
 
 // Route::pattern('id', '[0-9]+');
 Route::pattern('exam', '[0-9]+');
+Route::pattern('topic', '[0-9]+');
 
 Route::get('/', 'ExamController@index')->name('index');
 
@@ -41,8 +42,8 @@ Route::get('/home', 'ExamController@index')->name('home'); //登入完會看到�
 Route::get('/exam', 'ExamController@index')->name('exam.index'); //指定打網址  localhost/exam   會導至首頁
 //Route::get('/exam/{id}', 'ExamController@show')->name('exam.show')->where('id', '[0-9]+'); //限定id只能是數字
 Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
-Route::get('/exam/{exam}/edit', 'ExamController@edit')->name('exam.edit');
-Route::patch('/exam/{exam}', 'ExamController@update')->name('exam.update');
+Route::get('/exam/{exam}/edit', 'ExamController@edit')->name('exam.edit'); //編輯測驗
+Route::patch('/exam/{exam}', 'ExamController@update')->name('exam.update'); //更新測驗
 // Route::get('/exam/create', function () {
 //     //建立測驗的路由
 //     return view('exam.create');
@@ -51,3 +52,5 @@ Route::patch('/exam/{exam}', 'ExamController@update')->name('exam.update');
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
 Route::post('/topic', 'TopicController@store')->name('exam.topic');
+Route::get('/topic/{topic}/edit', 'TopicController@edit')->name('topic.edit'); //編輯題目
+Route::patch('/topic/{topic}', 'TopicController@update')->name('topic.update'); //更新題目

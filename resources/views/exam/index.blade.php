@@ -8,9 +8,13 @@
         <div class="list-group">      
 
             @forelse($exams as $exam)
-                
+
                 {{-- <a href="#" class="list-group-item list-group-item-action">{{ $exam->title }}</a> --}}
                 <a  href="exam/{{ $exam->id }}" class="list-group-item list-group-item-action">
+                    @if($exam->enable!=1)               
+                        {{ bs()->badge('danger')->text('未啟用') }}
+                        {{-- <span class="badge badge-danger">未啟用</span> --}}
+                    @endif
                     {{ $exam->updated_at->format('Y年m月d日')}}
                     {{ $exam->title }}
                 </a>
