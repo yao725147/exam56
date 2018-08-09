@@ -118,9 +118,10 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Exam $exam)
     {
-        //
+        //編輯測驗
+        return view('exam.create', compact('exam'));
     }
 
     /**
@@ -130,11 +131,12 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ExamRequest $request, Exam $exam)
     {
-        //
+        //更新測驗
+        $exam->update($request->all()); //更新測驗
+        return redirect()->route('exam.show', $exam->id); //轉回原本的測驗頁面
     }
-
     /**
      * Remove the specified resource from storage.
      *
