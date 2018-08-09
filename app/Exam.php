@@ -24,4 +24,8 @@ class Exam extends Model
     {
         return $this->hasMany('App\Test'); //一個測驗卷可能有很多考試
     }
+    public function user()
+    {
+        return $this->belongsTo('App\User'); //這個考試是由誰發佈
+    }
 }
