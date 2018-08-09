@@ -161,7 +161,7 @@
                         swal("OK！刪掉測驗惹！", "該測驗所有資料已經隨風而逝了...", "success");
                         // 調用刪除介面，用 id 來拼接出請求的 url
                         axios.delete('/exam/' + id).then(function () {
-                            location.href='/exam';
+                            location.href='/exam'; //刪完後,連回首頁
                         });
                     }
                 });

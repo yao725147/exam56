@@ -19,4 +19,9 @@ class Exam extends Model
     {
         return $this->hasMany('App\Topic'); //一個測驗有很多個題目
     }
+
+    public function tests()
+    {
+        return $this->hasMany('App\Test'); //一個測驗卷可能有很多考試
+    }
 }
