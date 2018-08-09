@@ -6,7 +6,7 @@
     @can('建立測驗')
         @if(isset($exam))
         <h1>編輯測驗</h1>
-            {{ bs()->openForm('patch', "/exam/{$exam->id}"),['model'=>$exam] }}
+            {{ bs()->openForm('patch', "/exam/{$exam->id}",['model'=>$exam]) }}
         @else
         <h1>建立測驗</h1>
             {{ bs()->openForm('post', '/exam') }}
@@ -24,7 +24,7 @@
             {{ bs()->formGroup()
                 ->label('是否啟用', false, 'text-sm-right')
                 ->control(bs()->radioGroup('enable', [1 => '啟用', 0 => '關閉'])
-                    ->selectedOption(isset($exam)?$exam->enable:1)
+                    // ->selectedOption(isset($exam)?$exam->enable:1)
                     ->inline())
                 ->showAsRow() }}
 
