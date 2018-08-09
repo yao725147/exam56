@@ -148,16 +148,27 @@ class ExamController extends Controller
         $exam->update($request->all()); //更新測驗
         return redirect()->route('exam.show', $exam->id); //轉回原本的測驗頁面
     }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //----- 直接刪除 ------//
+    // public function destroy(Exam $exam)
+    // {
+    //     //刪除測驗
+    //     $exam->delete();
+    //     return redirect()->route('exam.index');
+    // }
+
+    //----- 確認後刪除 ------//
     public function destroy(Exam $exam)
     {
         //刪除測驗
         $exam->delete();
-        return redirect()->route('exam.index');
     }
+
 }
