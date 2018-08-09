@@ -44,6 +44,7 @@ Route::get('/exam', 'ExamController@index')->name('exam.index'); //指定打網�
 Route::get('/exam/{exam}', 'ExamController@show')->name('exam.show');
 Route::get('/exam/{exam}/edit', 'ExamController@edit')->name('exam.edit'); //編輯測驗
 Route::patch('/exam/{exam}', 'ExamController@update')->name('exam.update'); //更新測驗
+Route::delete('/exam/{exam}', 'ExamController@destroy')->name('exam.destroy'); //刪除測驗
 // Route::get('/exam/create', function () {
 //     //建立測驗的路由
 //     return view('exam.create');
@@ -54,3 +55,4 @@ Route::post('/exam', 'ExamController@store')->name('exam.store');
 Route::post('/topic', 'TopicController@store')->name('exam.topic');
 Route::get('/topic/{topic}/edit', 'TopicController@edit')->name('topic.edit'); //編輯題目
 Route::patch('/topic/{topic}', 'TopicController@update')->name('topic.update'); //更新題目
+Route::delete('/topic/{topic}', 'TopicController@destroy')->name('topic.destroy'); //刪除題目

@@ -93,8 +93,18 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    public function destroy(Topic $topic)
     {
-        //
+        $topic->delete();
+        return redirect()->route('exam.show', $topic->exam_id);
     }
+
+    // 當我們沒有使用路由模型綁定時，也可以用靜態方法的destroy()也可以，但此例我們需要抓出exam_id的值，故用destroy()也沒比較省事，因此底下參考一下即可。
+
+    // public function destroy($id)
+    // {
+    //     Topic::destroy($id);
+    //     return redirect()->route('exam.show', $id);
+    // }
 }

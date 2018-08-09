@@ -5,7 +5,13 @@
     {{-- container是bootstrap的用法,它是一個容器 --}}
         <h1>
             {{$exam->title}}
-            @can('建立測驗')  
+            @can('建立測驗')
+                {{-- 刪除測驗 --}}
+                <form action="{{route('exam.destroy', $exam->id)}}"  method="post" style="display:inline">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">刪除測驗</button>
+                </form>     
                 <a href="{{ route('exam.edit',$exam->id)}}" class="btn btn-warning">編輯測驗</a>
             @endcan
         </h1>
@@ -15,6 +21,9 @@
 
         {{-- 建立測驗題目 --}}
         @can('建立測驗')  
+
+
+            {{-- 編輯測驗 --}}
             @if(isset($topic))
             {{-- //編輯測驗題目 --}}
             {{ bs()->openForm('patch', "/topic/{$topic->id}", ['model' => $topic]) }}   
@@ -61,7 +70,7 @@
         @endcan
 
 
-
+        {{-- 測驗題目 --}}
         <dl>
             {{-- $key是陣列的索引值 --}}
             {{-- @forelse ($topics as $key => $topic)  --}}
@@ -69,6 +78,12 @@
             <dt class="h3">
                 
                 @can('建立測驗')
+                {{-- 刪除測驗題目 --}}
+                <form action="{{route('topic.destroy', $topic->id)}}"  method="post" style="display:inline">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">刪除題目</button>
+                </form>                
                     <a href="{{route('topic.edit', $topic->id)}}" class="btn btn-warning">編輯題目</a>
                     （{{$topic->ans}}）
                 @endcan
