@@ -121,8 +121,9 @@ class ExamController extends Controller
         $user = Auth::user(); //抓出登入者資料
         //判斷是否是學生,若是就可進行測驗
         if ($user and $user->can('進行測驗')) {
-            if ($exam->topics->count() >= 5) { //大於等於5題才出題
-                $exam->topics = $exam->topics->random(5); //隨機抓出5個題目
+            $show_num = 5; //指定要出的題目數
+            if ($exam->topics->count() >= $show_num) { //大於等於指定的題數才出題
+                $exam->topics = $exam->topics->random($show_num); //隨機抓出指定的題數 題目
             }
 
         }

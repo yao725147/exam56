@@ -37,12 +37,20 @@ class TestController extends Controller
     public function store(Request $request)
     {
         //
-        $content = collect($request->ans)->toJson();
-        $score   = 0;
+        $content     = collect($request->ans)->toJson();
+        $right_ans   = 0; //答對題數
+        $show_num    = collect($request->ans)->count(); //題數
+        $topic_score = round(100 / $totalTopic, 2); //每題得分
+
         foreach ($request->ans as $topic_id => $ans) {
             $topic = Topic::find($topic_id);
-            $score += ($topic->ans == $ans) ? 20 : 0; //考5題,每答題一題+20分
+            if ($topic->ans == ans) {
+                $right_ans++;
+            }
         }
+
+        //依據答對比例算分
+        $score = round(100 * ($right_ans / $show_num), 0);
 
         $test = Test::create([
             'content' => $content,

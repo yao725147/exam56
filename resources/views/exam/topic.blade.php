@@ -24,6 +24,7 @@
             
         </dt>
         <dd class="opt">
+            {{ bs()->hidden("ans[$topic->id]",0)}}  {{--設一個隱藏欄位,給答案預設值 0,避免學生都未填答,json檔會沒資料--}}
             {{ bs()->radioGroup("ans[$topic->id]", [
                     1=>"<span class='opt'>&#10102; $topic->opt1</span>",
                     2=>"<span class='opt'>&#10103; $topic->opt2</span>",
