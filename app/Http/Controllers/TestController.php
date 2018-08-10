@@ -41,7 +41,7 @@ class TestController extends Controller
         $score   = 0;
         foreach ($request->ans as $topic_id => $ans) {
             $topic = Topic::find($topic_id);
-            $score += ($topic->ans == $ans) ? 20 : 0;
+            $score += ($topic->ans == $ans) ? 20 : 0; //考5題,每答題一題+20分
         }
 
         $test = Test::create([
@@ -59,9 +59,21 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    //$test即為Test的資料物件，由於有設定關聯，所以，會一併抓出$test->exam及$test->user的資料
+    public function show(Test $test)
     {
-        //
+        //秀出考試結果
+        $topics  = json_decode($test->content, true); //考試者的填答做成json格式存入content中,並將json資料轉回陣列
+        $content = [];
+        $i       = 0;
+        foreach ($topics as $topic_id => $ans) {
+            $content[$i]['topic'] = Topic::find($topic_id);
+            $content[$i]['ans']   = $ans; //把使用者的作答一併存入$content陣列中，以便待會比對是否作答正確
+            $i++;
+
+        }
+        return view('exam.test', compact('test', 'content'));
     }
 
     /**

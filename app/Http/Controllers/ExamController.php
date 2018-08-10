@@ -118,9 +118,13 @@ class ExamController extends Controller
         // // dd($topics);
         // return view('exam.show', compact('exam', 'topics'));
 
-        $user = Auth::user();
+        $user = Auth::user(); //抓出登入者資料
+        //判斷是否是學生,若是就可進行測驗
         if ($user and $user->can('進行測驗')) {
-            $exam->topics = $exam->topics->random(10);
+            if ($exam->topics->count() >= 5) { //大於等於5題才出題
+                $exam->topics = $exam->topics->random(5); //隨機抓出5個題目
+            }
+
         }
 
         return view('exam.show', compact('exam'));

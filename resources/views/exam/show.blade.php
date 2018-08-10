@@ -32,11 +32,11 @@
         {{-- 測驗題目列表 --}}
 
         @if(Auth::check('建立測驗') || Auth::check('進行測驗'))
-            @can('進行測驗')
-                {{ bs()->openForm('post', '/test') }}
+            @can('進行測驗')   {{--可以進行測驗的人 就加入一個form--}}
+                {{ bs()->openForm('post', '/test') }} 
                     @include('exam.topic')
-                    {{ bs()->hidden('user_id', Auth::id()) }}
-                    {{ bs()->hidden('exam_id', $exam->id) }}
+                    {{ bs()->hidden('user_id', Auth::id()) }} {{--使用者編號--}}
+                    {{ bs()->hidden('exam_id', $exam->id) }}  {{--測驗id--}}
                     <div class="text-center my-5">
                         {{ bs()->submit('寫完送出') }}
                     </div>
